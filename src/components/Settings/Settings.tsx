@@ -1,3 +1,4 @@
+import toolState from "../../store/toolState";
 import "./Settings.scss";
 
 const Settings = () => {
@@ -5,6 +6,7 @@ const Settings = () => {
     <div className="settings-bar">
       <label htmlFor="line-width">Толщина линии</label>
       <input
+        onChange={(e) => toolState.setLineWidth(e.target.value)}
         style={{ margin: "0 10px" }}
         id="line-width"
         type="number"
@@ -13,7 +15,11 @@ const Settings = () => {
         max={50}
       />
       <label htmlFor="stroke-color">Цвет обводки</label>
-      <input id="stroke-color" type="color" />
+      <input
+        onChange={(e) => toolState.setStrokeColor(e.target.value)}
+        id="stroke-color"
+        type="color"
+      />
     </div>
   );
 };
