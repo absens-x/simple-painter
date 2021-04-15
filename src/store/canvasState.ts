@@ -1,23 +1,23 @@
 import { makeAutoObservable } from "mobx";
 
 class CanvasState {
-  canvas: any = null;
-  undoList: any = [];
-  redoList: any = [];
+  canvas: any;
+  undoList: string[] = [];
+  redoList: string[] = [];
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  setCanvas(canvas: any) {
+  setCanvas(canvas: HTMLCanvasElement) {
     this.canvas = canvas;
   }
 
-  pushToUndo(data: any) {
+  pushToUndo(data: string) {
     this.undoList.push(data);
   }
 
-  pushToRedo(data: any) {
+  pushToRedo(data: string) {
     this.redoList.push(data);
   }
 
@@ -27,7 +27,9 @@ class CanvasState {
       let dataUrl = this.undoList.pop();
       this.redoList.push(this.canvas.toDataURL());
       let img = new Image();
-      img.src = dataUrl;
+      if (dataUrl) {
+        img.src = dataUrl;
+      }
       img.onload = () => {
         ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         ctx.drawImage(img, 0, 0, this.canvas.width, this.canvas.height);
@@ -43,7 +45,9 @@ class CanvasState {
       let dataUrl = this.redoList.pop();
       this.undoList.push(this.canvas.toDataURL());
       let img = new Image();
-      img.src = dataUrl;
+      if (dataUrl) {
+        img.src = dataUrl;
+      }
       img.onload = () => {
         ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         ctx.drawImage(img, 0, 0, this.canvas.width, this.canvas.height);

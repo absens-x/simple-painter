@@ -1,7 +1,7 @@
 import React from "react";
 
 import Canvas from "../../components/Canvas/Canvas";
-import Settings from "../../components/Settings/Settings";
+import SettingBar from "../../components/SettingBar/SettingBar";
 import Toolbar from "../../components/Toolbar/Toolbar";
 
 import "./App.scss";
@@ -10,7 +10,7 @@ function App() {
   return (
     <div className="app">
       <Toolbar />
-      <Settings />
+      <SettingBar />
       <Canvas />
     </div>
   );

@@ -13,15 +13,15 @@ class ToolState {
     this.tool = tool;
   }
 
-  setFillColor(color: any) {
+  setFillColor(color: string) {
     this.tool.fillColor = color;
   }
 
-  setStrokeColor(color: any) {
+  setStrokeColor(color: string) {
     this.tool.strokeColor = color;
   }
 
-  setLineWidth(width: any) {
+  setLineWidth(width: number) {
     this.tool.lineWidth = width;
   }
 }

@@ -9,12 +9,12 @@ const Canvas = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    canvasState.setCanvas(canvasRef.current);
-    toolState.setTool(new Brush(canvasRef.current));
+    canvasState.setCanvas(canvasRef.current as HTMLCanvasElement);
+    toolState.setTool(new Brush(canvasRef.current as HTMLCanvasElement));
   }, []);
 
   function mouseDownHandler() {
-    canvasState.pushToUndo(canvasRef.current?.toDataURL());
+    canvasState.pushToUndo(canvasRef.current?.toDataURL() as string);
   }
 
   return (

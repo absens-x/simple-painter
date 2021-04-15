@@ -1,42 +1,44 @@
 import Tool from "./Tool";
 
 class Brush extends Tool {
-  mouseDown = false;
+  mousePressedDown: boolean = false;
 
-  constructor(canvas: any) {
+  constructor(canvas: HTMLCanvasElement) {
     super(canvas);
-    this.listen();
+    this.canvas.onmousemove = this.mouseMoveHandler;
+    this.canvas.onmousedown = this.mouseDownHandler;
+    this.canvas.onmouseup = this.mouseUpHandler;
+    // this.canvas
   }
 
-  listen() {
-    this.canvas.onmousemove = this.mouseMoveHandler.bind(this);
-    this.canvas.onmousedown = this.mouseDownHandler.bind(this);
-    this.canvas.onmouseup = this.mouseUpHandler.bind(this);
-  }
-
-  draw(x: any, y: any) {
-    this.ctx.lineTo(x, y);
-    this.ctx.stroke();
-  }
-
-  mouseUpHandler(e: any) {
-    this.mouseDown = false;
-  }
-
-  mouseDownHandler(e: any) {
-    this.mouseDown = true;
-    this.ctx.beginPath();
-    this.ctx.moveTo(
-      e.pageX - e.target.offsetLeft,
-      e.pageY - e.target.offsetTop
-    );
-  }
-
-  mouseMoveHandler(e: any) {
-    if (this.mouseDown) {
-      this.draw(e.pageX - e.target.offsetLeft, e.pageY - e.target.offsetTop);
+  draw(x: number, y: number) {
+    if (this.ctx) {
+      this.ctx.lineTo(x, y);
+      this.ctx.stroke();
     }
   }
+
+  mouseUpHandler = (): void => {
+    this.mousePressedDown = false;
+  };
+
+  mouseDownHandler = (e: MouseEvent): void => {
+    this.mousePressedDown = true;
+    const target = <HTMLElement>e.target;
+
+    if (this.ctx) {
+      this.ctx.beginPath();
+      this.ctx.moveTo(e.pageX - target.offsetLeft, e.pageY - target.offsetTop);
+    }
+  };
+
+  mouseMoveHandler = (e: MouseEvent): void => {
+    const target = <HTMLElement>e.target;
+
+    if (this.mousePressedDown) {
+      this.draw(e.pageX - target.offsetLeft, e.pageY - target.offsetTop);
+    }
+  };
 }
 
 export default Brush;

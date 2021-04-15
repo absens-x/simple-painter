@@ -1,12 +1,12 @@
 import toolState from "../../store/toolState";
-import "./Settings.scss";
+import "./SettingBar.scss";
 
-const Settings = () => {
+const SettingBar = () => {
   return (
     <div className="settings-bar">
       <label htmlFor="line-width">Толщина линии</label>
       <input
-        onChange={(e) => toolState.setLineWidth(e.target.value)}
+        onChange={(e) => toolState.setLineWidth(+e.target.value)}
         style={{ margin: "0 10px" }}
         id="line-width"
         type="number"
@@ -24,4 +24,4 @@ const Settings = () => {
   );
 };
 
-export default Settings;
+export default SettingBar;
