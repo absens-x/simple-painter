@@ -23,7 +23,7 @@ class Circle extends Tool {
 
   mouseDownHandler = (e: MouseEvent) => {
     this.mousePressedDown = true;
-    let canvasData = this.canvas.toDataURL();
+    let canvasData: string = this.canvas.toDataURL();
 
     const target = <HTMLElement>e.target;
     this.ctx?.beginPath();

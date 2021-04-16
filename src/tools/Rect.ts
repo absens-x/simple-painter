@@ -38,7 +38,7 @@ class Rect extends Tool {
       const currentX = e.pageX - target.offsetLeft;
       const currentY = e.pageY - target.offsetTop;
       let width = currentX - this.startX;
-      let height = currentX - this.startX;
+      let height = currentY - this.startY;
       this.draw(this.startX, this.startY, width, height);
     }
   };

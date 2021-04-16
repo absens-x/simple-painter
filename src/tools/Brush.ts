@@ -26,10 +26,8 @@ class Brush extends Tool {
     this.mousePressedDown = true;
     const target = <HTMLElement>e.target;
 
-    if (this.ctx) {
-      this.ctx.beginPath();
-      this.ctx.moveTo(e.pageX - target.offsetLeft, e.pageY - target.offsetTop);
-    }
+    this.ctx?.beginPath();
+    this.ctx?.moveTo(e.pageX - target.offsetLeft, e.pageY - target.offsetTop);
   };
 
   mouseMoveHandler = (e: MouseEvent): void => {
